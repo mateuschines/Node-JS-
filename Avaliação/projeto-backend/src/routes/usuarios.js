@@ -4,34 +4,6 @@ const router = express.Router();
 const validateSchema = require('./validateSchema');
 const controller = require('../controllers/usuarios');
 
-const bodyParser = require('body-parser');
-	server.use(bodyParser.json());
-	server.use(bodyParser.urlencoded({ extended: false }));
-
-	server.use((request, response, next) => {
-		if (usuarioAutenticado()) {
-		next();
-		} else {
-		response.status(403).send();
-		}
-		});
-	
-	 server.post('/usuarios/', checkSchema({
-		nome: {
-		in: "body",
-		isString: true,
-		notEmpty: true,
-		errorMessage: "Informe o nome do usuário."
-	}
-	}), (request, response) => {
-		const errors = validationResult(request);
-		if (!errors.isEmpty()) {
-		return response.status(422).json({ errors: errors.array() });
-	}
-		let usuario = request.body;
-		console.log('Usuários recebido:', usuario);
-		response.status(201).send();
-	})
 
 /*******
  * TODO: Definição das rotas do CRUD de Usuários e Login.
@@ -49,14 +21,14 @@ const bodyParser = require('body-parser');
  *******/
 
  const validateBody = {
-
-  }
+    body();
+  };
 
 // POST - /usuarios
-router.post('/', function (request, response) {
+router.post('/api/usuarios',
   	validateSchema(validateBody),
     controller.cadastro
-});
+);
 
 // GET - /usuarios/1
 router.get('/:usuarioId', function (request, response) {
