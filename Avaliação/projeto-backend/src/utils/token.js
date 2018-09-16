@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 /**
  * Chave de validação do JWT.
  */
-const SECRET_KEY = "aA}QNw>'q^p~)bp(Va4{//efDM>D7,CjDdg?[~Xzx,h$:sh=.a";
+const SECRET_KEY = "s3KurYt";
 
 /**
  * Middleware que verifica a validade e decodifica o token de autenticação presente no header 'x-access-token'.

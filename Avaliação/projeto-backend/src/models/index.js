@@ -27,7 +27,7 @@ const Usuario = sequelize.define('usuario', {
         type: Sequelize.STRING(200),
         allowNull: false,
     },
-    nascimento: Sequelize.DATEONLY,
+    nascimento: Sequelize.DATE,
     email: {
         type: Sequelize.STRING(200),
         unique: true,
@@ -36,16 +36,12 @@ const Usuario = sequelize.define('usuario', {
 });
 
 const Tarefa = sequelize.define('tarefa', {
-    id: {
-        primaryKey: true,
-        type: Sequelize.BIGINT,
-        autoIncrement: true,
-    },
-    nome: {
-        type: Sequelize.STRING(200),
-        allowNull: false,
-    },
-    marcarTarefa: Sequelize.BOOLEAN
+    nome: Sequelize.STRING,
+    descricao: Sequelize.TEXT,
+    marcarTarefa: {
+        type: Sequelize.INTEGER,
+        isNullable: true
+    }
 })
 
 /*******
@@ -54,14 +50,10 @@ const Tarefa = sequelize.define('tarefa', {
  *******/
 
 Usuario.hasMany(Tarefa, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION'
-})
+    foreignKey: 'usuarioId',
+    isNullable: true
+});
 
-Tarefa.belongsTo(Usuario, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION'
-})
 
 module.exports = {
     sequelize,
